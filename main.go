@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/BrenoLopez/go-first-api/src/config/database/mongodb"
 	"github.com/BrenoLopez/go-first-api/src/controller"
 	"github.com/BrenoLopez/go-first-api/src/model/service"
 	"github.com/BrenoLopez/go-first-api/src/routes"
@@ -17,6 +19,9 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+	context := context.Background()
+
+	mongodb.NewMongoDbConnection(context)
 	service := service.NewUserService()
 	userController := controller.NewUserController(service)
 	router := gin.Default()

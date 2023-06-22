@@ -12,10 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-var (
-	UserModelInterface model.UserModelInterface
-)
-
 func (userController *userController) CreateUser(context *gin.Context) {
 	zapFields := zap.String("jorney", "createUser")
 	logger.Info("Init create user controller", zapFields)
