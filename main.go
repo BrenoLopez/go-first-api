@@ -7,8 +7,6 @@ import (
 	"os"
 
 	"github.com/BrenoLopez/go-first-api/src/config/database/mongodb"
-	"github.com/BrenoLopez/go-first-api/src/controller"
-	"github.com/BrenoLopez/go-first-api/src/model/service"
 	"github.com/BrenoLopez/go-first-api/src/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -21,9 +19,15 @@ func main() {
 	}
 	context := context.Background()
 
-	mongodb.NewMongoDbConnection(context)
-	service := service.NewUserService()
-	userController := controller.NewUserController(service)
+	database, err := mongodb.NewMongoDbConnection(context)
+
+	if err != nil {
+		log.Fatalf("Error trying to connect to database, error=%s \n", err.Error())
+		return
+	}
+
+	userController := initDependencies(database)
+
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
 	routes.InitRoutes(&router.RouterGroup, userController)

@@ -7,9 +7,15 @@ import (
 	"go.uber.org/zap"
 )
 
-func (userService *userService) Create(userModel model.UserModelInterface) *httpError.HttpError {
+func (userService *userService) Create(userModel model.UserModelInterface) (model.UserModelInterface, *httpError.HttpError) {
 	logger.Info("Init create user model", zap.String("jorney", "createUser"))
 
 	userModel.EncryptPassword()
-	return nil
+
+	userDomain, err := userService.userRepository.Create(userModel)
+
+	if err != nil {
+		return nil, err
+	}
+	return userDomain, nil
 }

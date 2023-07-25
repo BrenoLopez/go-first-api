@@ -7,7 +7,7 @@ import (
 
 func CovertDomainToResponse(userModel model.UserModelInterface) response.UserResponseDto {
 	return response.UserResponseDto{
-		ID:    "",
+		ID:    userModel.GetId(),
 		Email: userModel.GetEmail(),
 		Name:  userModel.GetName(),
 		Age:   userModel.GetAge(),
