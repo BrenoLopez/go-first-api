@@ -31,5 +31,6 @@ func (userController *userController) CreateUser(context *gin.Context) {
 	}
 
 	logger.Info("User created successfully", zapFields)
+
 	context.JSON(http.StatusOK, view.CovertDomainToResponse(domainResult))
 }

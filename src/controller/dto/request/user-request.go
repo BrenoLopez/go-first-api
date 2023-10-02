@@ -6,3 +6,8 @@ type UserRequestDto struct {
 	Name     string `json:"name,omitempty" binding:"required,min=4,max=100"`
 	Age      int8   `json:"age,omitempty" binding:"required,min=1,max=140"`
 }
+
+type UserUpdateRequestDto struct {
+	Name string `json:"name,omitempty" binding:"omitempty,min=4,max=100"`
+	Age  int8   `json:"age,omitempty" binding:"omitempty,min=1,max=140"`
+}

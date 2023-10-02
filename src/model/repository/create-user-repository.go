@@ -11,10 +11,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-const (
-	MONGODB_COLLECTION = "MONGODB_COLLECTION"
-)
-
 func (userRepository *userRepository) Create(userModel model.UserModelInterface) (model.UserModelInterface, *httpError.HttpError) {
 	logger.Info("Init create user repository")
 	collectionName := os.Getenv(MONGODB_COLLECTION)

@@ -16,7 +16,8 @@ type userService struct {
 
 type UserServiceInterface interface {
 	Create(model.UserModelInterface) (model.UserModelInterface, *httpError.HttpError)
-	Update(string, model.UserModelInterface) *httpError.HttpError
-	Find(string) (*model.UserModelInterface, *httpError.HttpError)
+	Update(id string, userModel model.UserModelInterface) *httpError.HttpError
+	FindUserById(id string) (model.UserModelInterface, *httpError.HttpError)
+	FindUserByEmail(email string) (model.UserModelInterface, *httpError.HttpError)
 	Delete(string) *httpError.HttpError
 }

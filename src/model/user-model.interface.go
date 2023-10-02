@@ -18,3 +18,10 @@ func NewUserModel(email, password, name string, age int8) *userModel {
 		age:      age,
 	}
 }
+
+func NewUserUpdateModel(name string, age int8) *userModel {
+	return &userModel{
+		name: name,
+		age:  age,
+	}
+}
