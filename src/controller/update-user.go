@@ -33,10 +33,12 @@ func (userController *userController) UpdateUser(context *gin.Context) {
 	if _, err := primitive.ObjectIDFromHex(id); err != nil {
 		restError := httpError.NewBadRequestError("Invalid userId, must be a hex value")
 		context.JSON(restError.Code, restError)
+		return
 	}
 
 	if err != nil {
 		context.JSON(err.Code, err)
+		return
 	}
 
 	logger.Info("User updated successfully", zapFields)

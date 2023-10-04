@@ -26,8 +26,10 @@ func (userController *userController) CreateUser(context *gin.Context) {
 	userModel := model.NewUserModel(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Age)
 
 	domainResult, err := userController.service.Create(userModel)
+
 	if err != nil {
 		context.JSON(err.Code, err)
+		return
 	}
 
 	logger.Info("User created successfully", zapFields)

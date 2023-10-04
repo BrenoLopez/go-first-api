@@ -10,6 +10,12 @@ import (
 func (userService *userService) Create(userModel model.UserModelInterface) (model.UserModelInterface, *httpError.HttpError) {
 	logger.Info("Init create user model", zap.String("jorney", "createUser"))
 
+	_, err := userService.FindUserByEmail(userModel.GetEmail())
+
+	if err == nil {
+		return nil, httpError.NewBadRequestError("Email is already registered in another account!")
+	}
+
 	userModel.EncryptPassword()
 
 	userDomain, err := userService.userRepository.Create(userModel)
